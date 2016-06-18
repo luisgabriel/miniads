@@ -3,5 +3,21 @@
   <%= @ad.budget %>
 </p>
 
+<h2>Creatives</h2>
+
+<table>
+  <tr>
+    <th>Bid</th>
+    <th>Ad Text</th>
+  </tr>
+
+  <% @ad.creatives.each do |creative| %>
+    <tr>
+      <td><%= creative.bid %></td>
+      <td><%= creative.ad_text %></td>
+    </tr>
+  <% end %>
+</table>
+
 <%= link_to 'Edit', edit_ad_path(@ad) %> |
 <%= link_to 'Back', ads_path %>

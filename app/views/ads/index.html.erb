@@ -6,6 +6,7 @@
   <tr>
     <th>ID</th>
     <th>Budget</th>
+    <th># of creatives</th>
     <th colspan="2"></th>
   </tr>
 
@@ -13,6 +14,7 @@
     <tr>
       <td><%= ad.id %></td>
       <td><%= ad.budget %></td>
+      <td><%= ad.creatives.count %></td>
       <td><%= link_to 'Show', ad_path(ad) %></td>
       <td><%= link_to 'Edit', edit_ad_path(ad) %></td>
     </tr>

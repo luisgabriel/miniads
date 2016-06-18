@@ -17,6 +17,12 @@
     <%= f.text_field :budget %>
   </p>
 
+  <h2>Creatives</h2>
+
+  <%= f.fields_for :creatives do |builder| %>
+    <%= render "creative_fields", :f => builder %>
+  <% end %>
+
   <p>
     <%= f.submit %>
   </p>

@@ -11,12 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160618195634) do
+ActiveRecord::Schema.define(version: 20160618213637) do
 
   create_table "ads", force: :cascade do |t|
     t.decimal  "budget"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "creatives", force: :cascade do |t|
+    t.decimal  "bid"
+    t.text     "ad_text"
+    t.integer  "ad_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "creatives", ["ad_id"], name: "index_creatives_on_ad_id"
 
 end
