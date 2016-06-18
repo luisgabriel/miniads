@@ -6,12 +6,15 @@
   <tr>
     <th>ID</th>
     <th>Budget</th>
+    <th colspan="2"></th>
   </tr>
 
   <% @ads.each do |ad| %>
     <tr>
       <td><%= ad.id %></td>
       <td><%= ad.budget %></td>
+      <td><%= link_to 'Show', ad_path(ad) %></td>
+      <td><%= link_to 'Edit', edit_ad_path(ad) %></td>
     </tr>
   <% end %>
 </table>
