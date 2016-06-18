@@ -8,13 +8,17 @@ class AdsController < ApplicationController
   end
 
   def new
+    @ad = Ad.new
   end
 
   def create
     @ad = Ad.new(ad_params)
 
-    @ad.save
-    redirect_to @ad
+    if @ad.save
+      redirect_to @ad
+    else
+      render 'new'
+    end
   end
 
   private

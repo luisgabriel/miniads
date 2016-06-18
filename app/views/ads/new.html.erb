@@ -1,6 +1,19 @@
 <h1>New Ad</h1>
 
 <%= form_for :ad, url: ads_path do |f| %>
+  <% if @ad.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        Could not save this ad due to <%= pluralize(@ad.errors.count, "error") %>:
+      </h2>
+      <ul>
+        <% @ad.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <p>
     <%= f.label :budget %><br>
     <%= f.text_field :budget %>
