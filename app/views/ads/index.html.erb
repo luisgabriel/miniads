@@ -1,0 +1,17 @@
+<h1>Listing ads</h1>
+
+<%= link_to 'New ad', new_ad_path %>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Budget</th>
+  </tr>
+
+  <% @ads.each do |ad| %>
+    <tr>
+      <td><%= ad.id %></td>
+      <td><%= ad.budget %></td>
+    </tr>
+  <% end %>
+</table>
