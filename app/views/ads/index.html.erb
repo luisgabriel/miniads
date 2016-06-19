@@ -6,54 +6,22 @@
 </div>
 
 <% @ads.each do |ad| %>
-  <div class="row">
-    <div class="col-md-12">
-      <span class="ad-name"><%= ad.id %></span>
-      <span class="ad-budget">$<%= ad.budget %></span>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Bid</th>
-              <th>Ad Text</th>
-            </tr>
-        </thead>
-          <tbody>
-            <% ad.creatives.each do |creative| %>
-              <tr>
-                <td>$<%= creative.bid %></td>
-                <td><%= creative.ad_text %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+  <%= link_to edit_ad_path(ad) do %>
+    <div class="row ad-list-row">
+      <div class="col-md-1">
+        <h2><%= ad.id %>.</h2>
       </div>
-      <div class="col-md-6">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Places</th>
-              <th>Gender</th>
-            </tr>
-        </thead>
-          <tbody>
-            <% ad.targetings.each do |targeting| %>
-              <tr>
-                <td><%= targeting.places %></td>
-                <td><%= targeting.gender %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+      <div class="col-md-5 text-center">
+        <h2>$<%= ad.budget %></h2>
+      </div>
+      <div class="col-md-3 text-center">
+        <h2>Creatives: <%= ad.creatives.count %></h2>
+      </div>
+      <div class="col-md-3 text-center">
+        <h2>Targetings: <%= ad.targetings.count %></h2>
       </div>
     </div>
-    <div class="row show-edit-links">
-      <td><%= link_to 'Show', ad_path(ad) %></td> |
-      <td><%= link_to 'Edit', edit_ad_path(ad) %></td>
-    </div>
-  </div>
+  <% end %>
 <% end %>
 
 <div class="row">
