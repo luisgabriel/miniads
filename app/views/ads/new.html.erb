@@ -1,5 +1,10 @@
-<h1>New Ad</h1>
+<div class="row">
+  <div class="col-md-12 page-header">
+    <h1 class="text-center">New Ad</h1>
+    <%= link_to 'Back', ads_path, :class => "btn btn-default" %>
+  </div>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', ads_path %>
+  <div class="col-md-12">
+    <%= render 'form' %>
+  </div>
+</div>

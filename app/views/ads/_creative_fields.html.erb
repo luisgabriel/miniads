@@ -1,8 +1,14 @@
-<p>
-  <%= f.label :bid %><br>
-  <%= f.text_field :bid %>
-</p>
-<p>
-  <%= f.label :ad_text %><br>
-  <%= f.text_area :ad_text %>
-</p>
+<div class="form-group">
+  <%= f.label :bid, class: "col-md-2 control-label" %>
+  <div class="col-md-6 input-group">
+    <div class="input-group-addon">$</div>
+    <%= f.text_field :bid, class: "form-control" %>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :ad_text, class: "col-md-2 control-label" %>
+  <div class="col-md-6">
+    <%= f.text_area :ad_text, class: "form-control" %>
+  </div>
+</div>
