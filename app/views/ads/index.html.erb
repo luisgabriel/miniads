@@ -1,22 +1,41 @@
-<h1>Listing ads</h1>
+<div class="container">
+  <div class="row">
 
-<%= link_to 'New ad', new_ad_path %>
+    <div class="col-md-12">
+      <h1 class="text-center">Ads List</h1>
+      <%= link_to 'Create new Ad', new_ad_path, :class => "btn btn-default btn-new-ad" %>
+    </div>
 
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Budget</th>
-    <th># of creatives</th>
-    <th colspan="2"></th>
-  </tr>
-
-  <% @ads.each do |ad| %>
-    <tr>
-      <td><%= ad.id %></td>
-      <td><%= ad.budget %></td>
-      <td><%= ad.creatives.count %></td>
-      <td><%= link_to 'Show', ad_path(ad) %></td>
-      <td><%= link_to 'Edit', edit_ad_path(ad) %></td>
-    </tr>
-  <% end %>
-</table>
+    <% @ads.each do |ad| %>
+      <div class="col-md-12">
+        <span class="ad-name"><%= ad.id %></span>
+        <span class="ad-budget">$<%= ad.budget %></span>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Bid</th>
+                <th>Ad Text</th>
+              </tr>
+          </thead>
+            <tbody>
+              <% ad.creatives.each do |creative| %>
+                <tr>
+                  <td>$<%= creative.bid %></td>
+                  <td><%= creative.ad_text %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-6">[targetings]</div>
+      </div>
+      <div class="row show-edit-links">
+        <td><%= link_to 'Show', ad_path(ad) %></td> |
+        <td><%= link_to 'Edit', edit_ad_path(ad) %></td>
+      </div>
+    <% end %>
+  </div>
+</div>
