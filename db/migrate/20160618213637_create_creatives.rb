@@ -11,7 +11,8 @@ class CreateCreatives < ActiveRecord::Migration
 
       t.references :ad,
         index: true,
-        foreign_key: true
+        foreign_key: true,
+        null: false
 
       t.timestamps null: false
     end

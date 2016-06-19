@@ -28,7 +28,24 @@
           </tbody>
         </table>
       </div>
-      <div class="col-md-6">[targetings]</div>
+      <div class="col-md-6">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Places</th>
+              <th>Gender</th>
+            </tr>
+        </thead>
+          <tbody>
+            <% ad.targetings.each do |targeting| %>
+              <tr>
+                <td><%= targeting.places %></td>
+                <td><%= targeting.gender %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="row show-edit-links">
       <td><%= link_to 'Show', ad_path(ad) %></td> |

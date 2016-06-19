@@ -39,7 +39,10 @@
       <%= f.link_to_add "Add a creative", :creatives %>
     </div>
     <div class="col-md-6">
-      [ TODO ]
+      <%= f.fields_for :targetings, :html => {:class => "form-horizontal"} do |builder| %>
+        <%= render "targeting_fields", :f => builder %>
+      <% end %>
+      <%= f.link_to_add "Add a targeting", :targetings %>
     </div>
   </div>
 
