@@ -11,17 +11,17 @@
   </div>
 <% end %>
 
-<%= nested_form_for @ad, html: {class: "form-horizontal"} do |f| %>
+<%= simple_nested_form_for @ad, html: {class: 'form-horizontal'},
+  wrapper: :horizontal_form do |f| %>
+  <!-- Ad fields -->
   <div class="row">
-    <div class="form-group">
-      <%= f.label :budget, class: "col-md-4 control-label" %>
-      <div class="col-md-8 input-group">
-        <div class="input-group-addon">$</div>
-        <%= f.text_field :budget, class: "form-control" %>
-      </div>
-    </div>
+      <%= f.input :budget, wrapper: :horizontal_input_group do %>
+        <span class="input-group-addon">$</span>
+        <%= f.input_field :budget, class: "form-control" %>
+      <% end %>
   </div>
 
+  <!-- Creative and Target headers -->
   <div class="row">
     <div class="col-md-6">
       <h2 class="text-center">Creatives</h2>
@@ -32,23 +32,51 @@
   </div>
 
   <div class="row">
+    <!-- Creative fields -->
     <div class="col-md-6">
-      <%= f.fields_for :creatives, html: {class: "form-horizontal"} do |builder| %>
-        <%= render "creative_fields", :f => builder %>
+      <%= f.simple_fields_for :creatives, html: {class: "form-horizontal"} do |ff| %>
+        <div class="row">
+          <div id="creatives" class="col-md-12">
+            <%= ff.input :bid, wrapper: :horizontal_input_group do %>
+              <span class="input-group-addon">$</span>
+              <%= ff.input_field :bid, class: "form-control" %>
+            <% end %>
+            <%= ff.input :ad_text, wrapper: :horizontal_input_group %>
+            <hr>
+          </div>
+        </div>
       <% end %>
-      <%= f.link_to_add "Add a creative", :creatives %>
+
+      <div class="row text-center">
+        <%= f.link_to_add "More creatives", :creatives,
+          data: { target: "#creatives" }, class: "btn btn-default" %>
+      </div>
     </div>
+
+    <!-- Targeting fields -->
     <div class="col-md-6">
-      <%= f.fields_for :targetings, html: {class: "form-horizontal"} do |builder| %>
-        <%= render "targeting_fields", f: builder %>
+      <%= f.simple_fields_for :targetings, html: {class: "form-horizontal"} do |ff| %>
+        <div class="row">
+          <div id="targetings" class="col-md-12">
+            <%= ff.input :places %>
+            <%= ff.input :gender,
+              collection: Targeting.genders.keys.map { |w| [w.humanize, w] } %>
+            <hr>
+          </div>
+        </div>
       <% end %>
-      <%= f.link_to_add "Add a targeting", :targetings %>
+
+      <div class="row text-center">
+        <%= f.link_to_add "More targetings", :targetings,
+          data: { target: "#targetings" }, class: "btn btn-default" %>
+      </div>
     </div>
   </div>
 
+  <!-- Submit button -->
   <div class="row">
     <div class="col-md-12">
-      <%= f.submit 'Create', class: "btn btn-primary center-block" %>
+      <%= f.submit 'Create', class: "btn btn-primary btn-lg center-block" %>
     </div>
   </div>
 <% end %>
