@@ -1,4 +1,4 @@
-<%= form_for @ad do |f| %>
+<%= nested_form_for @ad do |f| %>
   <% if @ad.errors.any? %>
     <div id="error_explanation">
       <h2>
@@ -22,6 +22,7 @@
   <%= f.fields_for :creatives do |builder| %>
     <%= render "creative_fields", :f => builder %>
   <% end %>
+  <p><%= f.link_to_add "Add a creative", :creatives %></p>
 
   <p>
     <%= f.submit %>
