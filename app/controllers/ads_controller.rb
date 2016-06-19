@@ -1,6 +1,6 @@
 class AdsController < ApplicationController
   def index
-    @ads = Ad.all
+    @ads = Ad.page(params[:page]).per(10)
   end
 
   def show
