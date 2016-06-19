@@ -14,17 +14,17 @@
 ActiveRecord::Schema.define(version: 20160618213637) do
 
   create_table "ads", force: :cascade do |t|
-    t.decimal  "budget"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.decimal  "budget",     precision: 12, scale: 2, null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   create_table "creatives", force: :cascade do |t|
-    t.decimal  "bid"
-    t.text     "ad_text"
+    t.decimal  "bid",        precision: 12, scale: 2, null: false
+    t.text     "ad_text",                             null: false
     t.integer  "ad_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   add_index "creatives", ["ad_id"], name: "index_creatives_on_ad_id"
