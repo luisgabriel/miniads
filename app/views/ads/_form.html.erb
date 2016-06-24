@@ -11,7 +11,7 @@
   </div>
 <% end %>
 
-<%= simple_nested_form_for @ad, html: {class: 'form-horizontal'},
+<%= simple_nested_form_for @ad, html: {id: 'ad-form', class: 'form-horizontal'},
   wrapper: :horizontal_form do |f| %>
   <!-- Ad fields -->
   <div class="row">
@@ -60,7 +60,8 @@
           <div id="targetings" class="col-md-12">
             <%= ff.input :places %>
             <%= ff.input :gender,
-              collection: Targeting.genders.keys.map { |w| [w.humanize, w] } %>
+              collection: Targeting.genders.keys.map { |w| [w.humanize, w] },
+              selected: :unkown %>
             <hr>
           </div>
         </div>

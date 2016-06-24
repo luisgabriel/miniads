@@ -12,6 +12,6 @@ class Ad < ActiveRecord::Base
   validates :targetings,
     presence: true
 
-  accepts_nested_attributes_for :creatives
-  accepts_nested_attributes_for :targetings
+  accepts_nested_attributes_for :creatives, reject_if: :all_blank
+  accepts_nested_attributes_for :targetings, reject_if: :all_blank
 end
