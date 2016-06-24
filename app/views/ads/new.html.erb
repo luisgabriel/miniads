@@ -1,10 +1,9 @@
 <div class="row">
-  <div class="col-md-12 page-header">
-    <h1 class="text-center">New Ad</h1>
-    <%= link_to 'Back', ads_path, :class => "btn btn-default" %>
-  </div>
+  <%= render layout: 'header', locals: { title: 'New Ad'} do %>
+    <%= link_to ads_path, class: "btn btn-default" do %>
+      <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back
+    <% end %>
+  <% end %>
 
-  <div class="col-md-12">
-    <%= render 'form' %>
-  </div>
+  <%= render 'form' %>
 </div>

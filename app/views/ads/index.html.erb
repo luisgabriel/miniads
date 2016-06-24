@@ -1,10 +1,9 @@
 <div class="row">
-  <div class="col-md-12 page-header">
-    <h1 class="text-center">Ads List</h1>
+  <%= render layout: 'header', locals: { title: 'Ads List'} do %>
     <%= link_to new_ad_path, class: "btn btn-default btn-new-ad" do %>
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create Ad
     <% end %>
-  </div>
+  <% end %>
 </div>
 
 <% @ads.each do |ad| %>

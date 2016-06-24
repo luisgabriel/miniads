@@ -1,5 +1,9 @@
-<h1>Editing ad</h1>
+<div class="row">
+  <%= render layout: 'header', locals: { title: 'Edit Ad'} do %>
+    <%= link_to ads_path, class: "btn btn-default" do %>
+      <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back
+    <% end %>
+  <% end %>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', ads_path %>
+  <%= render 'form' %>
+</div>

@@ -4,7 +4,8 @@ class AdsController < ApplicationController
   end
 
   def show
-    @ad = Ad.find(params[:id])
+    @ad = Ad.find params[:id]
+    render :edit
   end
 
   def new
@@ -14,26 +15,26 @@ class AdsController < ApplicationController
   end
 
   def edit
-    @ad = Ad.find(params[:id])
+    @ad = Ad.find params[:id]
   end
 
   def create
-    @ad = Ad.new(ad_params)
+    @ad = Ad.new ad_params
 
     if @ad.save
-      redirect_to @ad
+      redirect_to action: :index
     else
-      render 'new'
+      render :new
     end
   end
 
   def update
-    @ad = Ad.find(params[:id])
+    @ad = Ad.find params[:id]
 
-    if @ad.update(ad_params)
-      redirect_to @ad
+    if @ad.update ad_params
+      redirect_to action: :index
     else
-      render 'edit'
+      render :edit
     end
   end
 
