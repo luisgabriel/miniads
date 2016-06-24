@@ -1,18 +1,8 @@
-<% if @ad.errors.any? %>
-  <div id="error_explanation">
-    <h2>
-      Could not save this ad due to <%= pluralize(@ad.errors.count, "error") %>:
-    </h2>
-    <ul>
-      <% @ad.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
 <%= simple_nested_form_for @ad, html: {id: 'ad-form', class: 'form-horizontal'},
   wrapper: :horizontal_form do |f| %>
+  <!-- Error indication -->
+  <%= f.error_notification %>
+
   <!-- Ad fields -->
   <div class="row">
       <%= f.input :budget, wrapper: :horizontal_input_group do %>
@@ -34,7 +24,8 @@
   <div class="row">
     <!-- Creative fields -->
     <div class="col-md-6">
-      <%= f.simple_fields_for :creatives, html: {class: "form-horizontal"} do |ff| %>
+      <%= f.simple_fields_for :creatives, wrapper: :horizontal_input_group,
+        html: {class: "form-horizontal"} do |ff| %>
         <div class="row">
           <div id="creatives" class="col-md-12">
             <%= ff.input :bid, wrapper: :horizontal_input_group do %>
@@ -55,13 +46,14 @@
 
     <!-- Targeting fields -->
     <div class="col-md-6">
-      <%= f.simple_fields_for :targetings, html: {class: "form-horizontal"} do |ff| %>
+      <%= f.simple_fields_for :targetings, wrapper: :horizontal_input_group,
+        html: {class: "form-horizontal"} do |ff| %>
         <div class="row">
           <div id="targetings" class="col-md-12">
             <%= ff.input :places %>
             <%= ff.input :gender,
               collection: Targeting.genders.keys.map { |w| [w.humanize, w] },
-              selected: :unkown %>
+              selected: :unkown, include_blank: true %>
             <hr>
           </div>
         </div>

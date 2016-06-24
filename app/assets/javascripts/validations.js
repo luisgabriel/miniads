@@ -1,7 +1,24 @@
 $(document).ready(function() {
   $(document).on('nested:fieldAdded:creatives', makeExtraCreativesOptional);
+  $(document).on('nested:fieldAdded:targetings', unselectTargetingGender);
   $('#ad-form').submit(validate);
 });
+
+var makeExtraCreativesOptional = function (event) {
+  var inputs = event.field.find('.form-control');
+  for (var i = 0; i < inputs.length; i++) {
+    inputs[i].classList.remove('required');
+    inputs[i].removeAttribute('required');
+    inputs[i].removeAttribute('aria-required');
+  }
+
+  $(event.target).find('abbr').remove();
+};
+
+var unselectTargetingGender = function (event) {
+  var inputs = event.field.find('.form-control');
+  inputs[inputs.length-1].selectedIndex = 0;
+};
 
 var validate = function (event) {
   clearErrors();
@@ -34,17 +51,6 @@ var showBidError = function (index) {
   $(div).addClass('has-error');
   $(div).find('.col-sm-9')
     .append(errorBlock('This value cannot be bigger than the Ad\'s budget.'));
-};
-
-var makeExtraCreativesOptional = function (event) {
-  var inputs = event.field.find('.form-control');
-  for (var i = 0; i < inputs.length; i++) {
-    inputs[i].classList.remove('required');
-    inputs[i].removeAttribute('required');
-    inputs[i].removeAttribute('aria-required');
-  }
-
-  $(event.target).find('abbr').remove();
 };
 
 var validateBid = function () {
