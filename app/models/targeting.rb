@@ -9,7 +9,7 @@ class Targeting < ActiveRecord::Base
     allow_blank: true,
     format: {
       with: /\A([a-z]+)(,\s*[a-z]+)*\z/i,
-      message: 'Must use only comma-separated places with alphabetic characters'
+      message: 'Must use only comma-separated single-word places with alphabetic characters'
     }
 
   validates :gender,
