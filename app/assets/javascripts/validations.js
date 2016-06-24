@@ -36,21 +36,27 @@ var validate = function (event) {
 };
 
 var clearErrors = function () {
+  $('.alert-danger').remove();
   $('.has-error').each(function (index, element) {
     $(element).removeClass('has-error');
   });
   $('.help-block').remove();
 };
 
-var errorBlock = function (message) {
-  return $('<span class=\'help-block\'>' + message + '</span>');
+var errorIndication = function () {
+  return $('<div class="alert alert-danger">Please review the problems below:</div>');
+}
+
+var errorMessage = function (message) {
+  return $('<span class="help-block">' + message + '</span>');
 };
 
 var showBidError = function (index) {
+  $('#ad-form').prepend(errorIndication);
   var div = $('.ad_creatives_bid')[index];
   $(div).addClass('has-error');
   $(div).find('.col-sm-9')
-    .append(errorBlock('This value cannot be bigger than the Ad\'s budget.'));
+    .append(errorMessage('This value cannot be bigger than the Ad\'s budget.'));
 };
 
 var validateBid = function () {
