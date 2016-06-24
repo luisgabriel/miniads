@@ -1,22 +1,22 @@
-$(document).on('nested:fieldAdded:creatives', function(event){
-  makeExtraCreativesOptional(event.field, event.target);
-});
-
 $(document).ready(function() {
-  $('#ad-form').submit(function (event) {
-    clearErrors();
-
-    var validation = validateBid();
-    if (!validation.ok) {
-      showBidError(validation.index);
-      event.preventDefault();
-      return;
-    }
-
-    //console.log('VALID');
-    //event.preventDefault(); // REMOVE
-  });
+  $(document).on('nested:fieldAdded:creatives', makeExtraCreativesOptional);
+  $('#ad-form').submit(validate);
 });
+
+var validate = function (event) {
+  clearErrors();
+
+  var validation = validateBid();
+  console.log(validation)
+  if (!validation.ok) {
+    showBidError(validation.index);
+    event.preventDefault();
+    return;
+  }
+
+  //console.log('VALID');
+  //event.preventDefault(); // REMOVE
+};
 
 var clearErrors = function () {
   $('.has-error').each(function (index, element) {
@@ -36,15 +36,15 @@ var showBidError = function (index) {
     .append(errorBlock('This value cannot be bigger than the Ad\'s budget.'));
 };
 
-var makeExtraCreativesOptional = function (field, target) {
-  var inputs = field.find('.form-control');
+var makeExtraCreativesOptional = function (event) {
+  var inputs = event.field.find('.form-control');
   for (var i = 0; i < inputs.length; i++) {
     inputs[i].classList.remove('required');
     inputs[i].removeAttribute('required');
     inputs[i].removeAttribute('aria-required');
   }
 
-  $(target).find('abbr').remove();
+  $(event.target).find('abbr').remove();
 };
 
 var validateBid = function () {
@@ -54,7 +54,7 @@ var validateBid = function () {
   var elements = $('.ad_creatives_bid');
   var e, i;
   for (i = 0; i < elements.length && valid; i++) {
-    e = $(elements[i]).find('.form-control')
+    e = $(elements[i]).find('.form-control');
     if (e.val() > budget)
       valid = false;
   }
