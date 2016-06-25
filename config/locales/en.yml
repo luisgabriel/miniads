@@ -6,3 +6,7 @@ en:
           attributes:
             bid:
               less_than_or_equal_to: "Bid cannot be greater than the Ad's budget"
+        targeting:
+          attributes:
+            gender:
+              inclusion: "Select one of the gender options"

@@ -1,4 +1,10 @@
 var ready = function () {
+  if (ready.loaded) {
+    return;
+  } else {
+    ready.loaded = true;
+  }
+
   $(document).on('nested:fieldAdded:creatives', makeExtraCreativesOptional);
   $(document).on('nested:fieldAdded:targetings', unselectTargetingGender);
   $('#ad-form').submit(validate);
@@ -36,7 +42,12 @@ var validate = function (event) {
     return;
   }
 
-  //event.preventDefault(); // REMOVE
+  var validation = validateTargeting();
+  if (!validation.ok) {
+    showTargetingError(validation.index);
+    event.preventDefault();
+    return;
+  }
 };
 
 /***********************************************
@@ -58,12 +69,25 @@ var errorMessage = function (message) {
   return $('<span class="help-block">' + message + '</span>');
 };
 
+var showError = function (div, message) {
+  $(div).addClass('has-error');
+  $(div).find('.col-sm-9')
+    .append(errorMessage(message));
+};
+
 var showBidError = function (index) {
   $('#ad-form').prepend(errorIndication);
   var div = $('.ad_creatives_bid')[index];
-  $(div).addClass('has-error');
-  $(div).find('.col-sm-9')
-    .append(errorMessage('This value cannot be bigger than the Ad\'s budget.'));
+  showError(div, 'This value cannot be bigger than the Ad\'s budget.');
+};
+
+var showTargetingError = function (index) {
+  $('#ad-form').prepend(errorIndication);
+  var placesDiv = $('.ad_targetings_places')[index];
+  showError(placesDiv, 'No target specified');
+
+  var genderDiv = $('.ad_targetings_gender')[index];
+  showError(genderDiv, 'No target specified');
 };
 
 /***********************************************
@@ -79,6 +103,29 @@ var validateBid = function () {
     bid = parseFloat($(elements[i]).find('.form-control').val());
     if (bid > budget)
       valid = false;
+  }
+
+  return {
+    ok: valid,
+    index: i-1
+  };
+};
+
+var validateTargeting = function () {
+  var validateFields = function (place, gender, acceptBlank) {
+    if (acceptBlank && !place && gender === 0)
+      return true;
+
+    return Boolean((place || gender != 3) && gender != 0);
+  };
+
+  var valid = true;
+  var places = $('input[id*="_places"]');
+  var genders = $('select[id*="_gender"]');
+
+  var i;
+  for (i = 0; i < places.length && valid; i++) {
+    valid = validateFields(places[i].value, genders[i].selectedIndex, i !== 0);
   }
 
   return {
