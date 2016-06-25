@@ -8,23 +8,14 @@
   src: url(asset_path('glyphicons-halflings-regular.eot?#iefix')) format('embedded-opentype'), url(asset_path('glyphicons-halflings-regular.woff')) format('woff'), url(asset_path('glyphicons-halflings-regular.ttf')) format('truetype'), url(asset_path('glyphicons-halflings-regular.svg#glyphicons_halflingsregular')) format('svg');
 }
 
+.link-wrapper {
+  color: #333 !important;
+}
+
 .ad-list-row {
   &:hover {
     background-color: #EDEDED;
   }
-}
-
-.ad-name {
-  font-size: 28px;
-}
-
-.ad-budget {
-  font-size: 28px;
-  float: right;
-}
-
-.show-edit-links {
-  float: right;
 }
 
 .btn-new-ad {
